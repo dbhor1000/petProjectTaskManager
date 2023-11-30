@@ -7,6 +7,7 @@ import java.time.OffsetDateTime
 @Table(name = "tasks")
 data class Task(
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int,

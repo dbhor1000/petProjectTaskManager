@@ -6,6 +6,7 @@ import jakarta.persistence.*
 @Table(name = "commentaries")
 data class Comment (
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int,

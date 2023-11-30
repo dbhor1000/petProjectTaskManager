@@ -7,4 +7,5 @@ import service.TaskService
 @RestController
 @RequestMapping("/tasks")
 class TaskController(private val taskService: TaskService) {
+
 }

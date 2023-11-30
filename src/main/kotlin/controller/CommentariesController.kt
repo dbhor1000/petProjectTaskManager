@@ -7,4 +7,5 @@ import service.CommentariesService
 @RestController
 @RequestMapping("/commentaries")
 class CommentariesController(private val commentariesService: CommentariesService) {
+
 }

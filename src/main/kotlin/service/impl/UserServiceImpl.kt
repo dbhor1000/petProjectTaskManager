@@ -10,4 +10,5 @@ class UserServiceImpl(private val userRepository: UserRepository) : UserService{
 
     override fun addUser(user: User): User = userRepository.save(user)
 
+
 }
