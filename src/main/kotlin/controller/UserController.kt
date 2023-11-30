@@ -14,6 +14,7 @@ import java.net.URI
 @RequestMapping("/usersController")
 class UserController(@Autowired private val userService: UserService) {
 
+
     @PostMapping("/addNew")
     fun addUser(@RequestBody user: User): ResponseEntity<User> {
         val newUser = userService.addUser(user)
