@@ -1,5 +1,0 @@
-package service
-
-interface CommentariesService {
-
-}

@@ -1,4 +1,4 @@
-package model
+package org.example.model
 
 import jakarta.persistence.*
 
@@ -11,7 +11,8 @@ data class User (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int,
     val name: String,
-    @ManyToMany(mappedBy = "correspondingTask", fetch = FetchType.LAZY)
-    var tasks: List<Task>?
+    val email: String,
+    //@OneToMany(mappedBy = "correspondingTask", fetch = FetchType.LAZY)
+    //var tasks: List<Task>?
 
 )

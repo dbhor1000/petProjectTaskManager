@@ -1,11 +1,11 @@
-package controller
+package org.example.controller
 
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import service.CommentariesService
+import org.example.service.CommentService
 
 @RestController
 @RequestMapping("/commentaries")
-class CommentariesController(private val commentariesService: CommentariesService) {
+class CommentController(private val commentService: CommentService) {
 
 }
