@@ -1,5 +1,3 @@
 package org.example.service
 
-interface CommentService {
-
-}
+interface CommentService

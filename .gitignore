@@ -1,0 +1,9 @@
+*.class
+*.log
+*.jar
+.idea
+*.iml
+.jpb
+target
+*.private.env.json
+*.docx#

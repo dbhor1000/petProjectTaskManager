@@ -4,15 +4,15 @@ import jakarta.persistence.*
 
 @Entity
 @Table(name = "users")
-class User (
-
+class User(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int,
+    val id: Long? = null,
     val name: String,
     val email: String,
-    //@OneToMany(mappedBy = "correspondingTask", fetch = FetchType.LAZY)
-    //var tasks: List<Task>?
-
+    @OneToMany(mappedBy = "appointedBy", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.LAZY)
+    var appointedTasks: List<Task>,
+    @OneToMany(mappedBy = "createdBy", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.LAZY)
+    var createdTasks: List<Task>,
 )

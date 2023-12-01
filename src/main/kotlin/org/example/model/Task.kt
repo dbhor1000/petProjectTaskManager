@@ -1,4 +1,4 @@
-package org.example.model;
+package org.example.model
 
 import jakarta.persistence.*
 import java.time.OffsetDateTime
@@ -6,27 +6,25 @@ import java.time.OffsetDateTime
 @Entity
 @Table(name = "tasks")
 data class Task(
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int,
-    //val createdByUser: User,
-    val createdByUser: Long,
-    val createdAt: OffsetDateTime,
+    val id: Long? = null,
+    val name: String,
+    val description: String,
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "created_by", referencedColumnName = "id")
+    val createdBy: User,
+    val createdAt: OffsetDateTime = OffsetDateTime.now(),
     val executeAt: OffsetDateTime? = null,
-    //@ManyToOne
-    //@JoinColumn(name = "scenario_aggregate_id", referencedColumnName = "id")
-    //val usersInvolved: List<User>,
-    val usersInvolved: Long,
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "appointed_by", referencedColumnName = "id")
+    val appointedBy: User? = null,
     @OneToMany(mappedBy = "correspondingTask", fetch = FetchType.LAZY, orphanRemoval = true)
-    val commentaries: List<Comment>,
-//    val tags: List<Tags>
-
+    val commentaries: List<Comment> = emptyList(),
+    val tags: List<Tags> = emptyList(),
 )
 
-//enum class Tags {
-//
-//    COLLECTIVE, INDIVIDUAL, COMPULSORY, DELAYED, GUEST
-//
-//}
+enum class Tags {
+
+    COLLECTIVE, INDIVIDUAL, COMPULSORY, DELAYED, GUEST
+}

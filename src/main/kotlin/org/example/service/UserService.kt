@@ -6,5 +6,5 @@ interface UserService {
 
     fun addUser(user: User): User
 
-
+    fun getUserById(userId: Long): User?
 }

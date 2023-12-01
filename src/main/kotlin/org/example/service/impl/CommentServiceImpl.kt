@@ -4,6 +4,4 @@ import org.example.service.CommentService
 import org.springframework.stereotype.Service
 
 @Service
-class CommentServiceImpl : CommentService {
-
-}
+class CommentServiceImpl : CommentService
