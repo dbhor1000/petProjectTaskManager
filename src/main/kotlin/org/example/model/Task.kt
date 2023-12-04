@@ -12,13 +12,13 @@ data class Task(
     val name: String,
     val description: String,
     @ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "created_by", referencedColumnName = "id")
+    // @JoinColumn(name = "created_by", referencedColumnName = "id")
     @JoinColumn(name = "created_by")
     val createdBy: User,
     val createdAt: OffsetDateTime = OffsetDateTime.now(),
     val executeAt: OffsetDateTime? = null,
     @ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "appointed_by", referencedColumnName = "id")
+    // @JoinColumn(name = "appointed_by", referencedColumnName = "id")
     @JoinColumn(name = "appointed_by")
     val appointedBy: User? = null,
     @OneToMany(mappedBy = "correspondingTask", fetch = FetchType.LAZY, orphanRemoval = true)
@@ -26,7 +26,7 @@ data class Task(
     val tags: List<Tag> = emptyList(),
 )
 
-//enum class Tags {
+// enum class Tags {
 //
 //    COLLECTIVE, INDIVIDUAL, COMPULSORY, DELAYED, GUEST
-//}
+// }
