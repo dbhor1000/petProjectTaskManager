@@ -17,4 +17,10 @@ class TaskServiceImpl(private val repository: TaskRepository) : TaskService {
         }
         return false
     }
+
+    override fun getTaskById(id: Long): Task {
+
+        val taskFound = repository.findByIdOrNull(id)
+        return taskFound
+    }
 }
