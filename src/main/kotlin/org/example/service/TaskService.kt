@@ -5,4 +5,5 @@ import org.example.model.Task
 interface TaskService {
 
     fun save(task: Task): Task
+    fun deleteById(id: Long): Boolean
 }
