@@ -12,5 +12,8 @@ interface UserRepository : CrudRepository<User, Long> {
         """,
         nativeQuery = true,
     )
+    //@Query(
+    //    "select * from users b where b.id = :id"
+    //)
     fun getById(id: Long): User?
 }
