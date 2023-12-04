@@ -52,7 +52,7 @@ class TaskController(private val taskService: TaskService, private val userServi
 
         val taskFound = taskService.getTaskById(id)
 
-        return if (!taskFound.isEmpty) {
+        return if (taskFound != null) {
             return ResponseEntity(taskFound, HttpStatus.OK)
         } else {
             ResponseEntity.status(HttpStatus.NOT_FOUND).body(Unit)
@@ -78,7 +78,7 @@ class TaskController(private val taskService: TaskService, private val userServi
         // val user =
         //    userService.getUserById(id) ?: return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Unit)
 
-        val taskToPatchUser = taskService.getTaskById(id).id ?: return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Unit)
+        val taskToPatchUser = taskService.getTaskById(id)?.id ?: return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Unit)
         val user = userService.getUserById(taskToPatchUser) ?: return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Unit)
 
         val newTask = taskService.save(

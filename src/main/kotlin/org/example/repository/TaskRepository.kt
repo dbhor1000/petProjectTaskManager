@@ -14,8 +14,6 @@ interface TaskRepository : CrudRepository<Task, Long> {
 
     override fun existsById(id: Long): Boolean
 
-    fun findByIdOrNull(id: Long): Task
-
     @Query(
         """
             select * from tasks where id = :id
