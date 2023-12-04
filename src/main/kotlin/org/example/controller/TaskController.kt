@@ -79,10 +79,11 @@ class TaskController(private val taskService: TaskService, private val userServi
         //    userService.getUserById(id) ?: return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Unit)
 
         val taskToPatchUser = taskService.getTaskById(id).id ?: return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Unit)
+        val user = userService.getUserById(taskToPatchUser) ?: return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Unit)
 
         val newTask = taskService.save(
             Task(
-                createdBy = taskToPatchUser, // /
+                createdBy = user, // /
                 name = request.name,
                 description = request.description,
                 executeAt = request.executeAt,
