@@ -4,6 +4,7 @@ import org.example.model.User
 import org.example.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -14,7 +15,8 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/users")
 class UserController(@Autowired private val userService: UserService) {
 
-    @PostMapping
+    @PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE],
+        produces = [MediaType.APPLICATION_JSON_VALUE],)
     fun addUser(@RequestBody user: User): ResponseEntity<User> {
         val newUser = userService.addUser(user)
         return ResponseEntity(newUser, HttpStatus.CREATED)
