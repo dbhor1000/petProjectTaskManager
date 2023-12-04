@@ -35,17 +35,12 @@ class TaskController(private val taskService: TaskService, private val userServi
     @Transactional
     @DeleteMapping("/{id}")
     fun deleteTaskById(@PathVariable id: Long): ResponseEntity<*> {
-
         val deleteSuccessful = taskService.deleteById(id)
 
-        if (deleteSuccessful) {
-
-            return ResponseEntity.status(HttpStatus.OK).body(Unit)
-
+        return if (deleteSuccessful) {
+            ResponseEntity.status(HttpStatus.OK).body(Unit)
         } else {
-
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Unit)
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body(Unit)
         }
     }
-
 }

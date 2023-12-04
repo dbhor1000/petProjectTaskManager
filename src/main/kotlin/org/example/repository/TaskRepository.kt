@@ -10,7 +10,7 @@ interface TaskRepository : CrudRepository<Task, Long> {
 
     @Modifying
     @Query("delete from Task b where b.id=:id")
-    override fun deleteById(id: Long): Unit
-    override fun existsById(id: Long): Boolean
+    override fun deleteById(id: Long)
 
+    override fun existsById(id: Long): Boolean
 }
