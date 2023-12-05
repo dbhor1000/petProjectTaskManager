@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/comments")
-class CommentController(@Autowired private val commentService: CommentService, @Autowired private val taskService: TaskService, @Autowired private val userService: UserService) {
+class CommentController(@Autowired private val commentService: CommentService, private val taskService: TaskService, private val userService: UserService) {
 
+    //404 через postman, не устанавливается контакт с контроллером
     @PostMapping
     fun addComment(@RequestBody request: CreateCommentRequest): ResponseEntity<*> {
 
