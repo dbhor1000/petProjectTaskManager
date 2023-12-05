@@ -19,8 +19,8 @@ class UserController(@Autowired private val userService: UserService) {
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE],
     )
-    fun addUser(@RequestBody user: User): ResponseEntity<User> {
-        val newUser = userService.addUser(user)
-        return ResponseEntity(newUser, HttpStatus.CREATED)
+    fun addUser(@RequestBody user: User): ResponseEntity<*> {
+        userService.addUser(user)
+        return ResponseEntity.status(HttpStatus.CREATED).body(Unit)
     }
 }

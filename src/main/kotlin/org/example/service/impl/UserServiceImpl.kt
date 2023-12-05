@@ -8,7 +8,11 @@ import org.springframework.stereotype.Service
 @Service
 class UserServiceImpl(private val userRepository: UserRepository) : UserService {
 
-    override fun addUser(user: User): User = userRepository.save(user)
+    // override fun addUser(user: User): User = userRepository.save(user)
 
     override fun getUserById(userId: Long): User? = userRepository.getById(userId)
+
+    override fun addUser(user: User) {
+        val newUser = userRepository.save(user)
+    }
 }
