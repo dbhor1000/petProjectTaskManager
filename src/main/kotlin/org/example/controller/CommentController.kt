@@ -1,6 +1,8 @@
 package org.example.controller
 
 import jakarta.transaction.Transactional
+import org.example.controller.dto.CreateCommentRequest
+import org.example.controller.dto.PatchCommentRequest
 import org.example.model.Comment
 import org.example.service.CommentService
 import org.example.service.TaskService
