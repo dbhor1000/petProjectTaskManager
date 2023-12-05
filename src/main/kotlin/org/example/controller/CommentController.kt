@@ -1,23 +1,20 @@
 package org.example.controller
 
 import jakarta.transaction.Transactional
-import org.example.controller.dto.*
 import org.example.model.Comment
-import org.example.model.Task
 import org.example.service.CommentService
 import org.example.service.TaskService
 import org.example.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
-import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/comments")
-class CommentController(@Autowired private val commentService: CommentService, @Autowired private val taskService: TaskService, @Autowired private val  userService: UserService) {
+class CommentController(@Autowired private val commentService: CommentService, @Autowired private val taskService: TaskService, @Autowired private val userService: UserService) {
 
-    //Postman не видит endpoint. Пару дней назад, если не ошибаюсь, решали похожую проблему. Применил всё, что вспомнил, но решить проблему не получилось. Методы непроверенные, соответственно.
+    // Postman не видит endpoint. Пару дней назад, если не ошибаюсь, решали похожую проблему. Применил всё, что вспомнил, но решить проблему не получилось. Методы непроверенные, соответственно.
     @PostMapping
     fun addComment(@RequestBody request: CreateCommentRequest): ResponseEntity<*> {
 
@@ -46,7 +43,6 @@ class CommentController(@Autowired private val commentService: CommentService, @
         }
     }
 
-
     @GetMapping("/{id}")
     fun getTaskById(@PathVariable id: Long): ResponseEntity<*> {
 
@@ -62,12 +58,11 @@ class CommentController(@Autowired private val commentService: CommentService, @
     @PatchMapping("/{id}")
     fun patchCommentById(@RequestBody request: PatchCommentRequest, @PathVariable id: Long): ResponseEntity<*> {
 
-        val commentToPatch = commentService.getCommentById(id) ?: return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Unit) //Достали задачу через сервис из репозитория по id в ссылке
+        val commentToPatch = commentService.getCommentById(id) ?: return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Unit) // Достали задачу через сервис из репозитория по id в ссылке
 
         commentToPatch.commentText = request.commentText
         commentService.save(commentToPatch)
 
         return ResponseEntity(commentToPatch, HttpStatus.CREATED)
     }
-
 }
