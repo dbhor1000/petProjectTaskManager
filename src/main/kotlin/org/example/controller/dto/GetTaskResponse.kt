@@ -1,11 +1,10 @@
 package org.example.controller.dto
 
-import jakarta.persistence.*
 import org.example.model.Tag
 import org.example.model.User
 import java.time.OffsetDateTime
 
-data class GetTaskOutput(
+data class GetTaskResponse(
 
     val id: Long? = null,
     var name: String,

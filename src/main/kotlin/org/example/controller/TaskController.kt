@@ -1,7 +1,7 @@
 package org.example.controller
 
 import jakarta.transaction.Transactional
-import org.example.controller.dto.AddTagToTask
+import org.example.controller.dto.AddTagToTaskRequest
 import org.example.controller.dto.CreateTaskRequest
 import org.example.controller.dto.PatchTaskRequest
 import org.example.service.TaskService
@@ -66,8 +66,8 @@ class TaskController(private val taskService: TaskService, private val userServi
     }
 
     // Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content-Type 'text/plain;charset=UTF-8' is not supported]
-    @PatchMapping("/addTag/{id}")
-    fun addTagToTaskById(@RequestBody request: AddTagToTask, @PathVariable id: Long): ResponseEntity<*> {
+    @PatchMapping("/{id}/tag")
+    fun addTagToTaskById(@RequestBody request: AddTagToTaskRequest, @PathVariable id: Long): ResponseEntity<*> {
 
         if (taskService.addTagToTaskById(request, id) == true) {
             return ResponseEntity.status(HttpStatus.CREATED).body(Unit)

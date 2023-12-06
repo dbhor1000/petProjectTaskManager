@@ -39,11 +39,11 @@ class TaskServiceImpl(private val repository: TaskRepository, private val userRe
 
     // override fun getTaskById(id: Long): Task? = repository.findByIdOrNull(id)
 
-    override fun getTaskById(id: Long): GetTaskOutput? {
+    override fun getTaskById(id: Long): GetTaskResponse? {
 
         val taskFound = repository.findByIdOrNull(id)
         if (taskFound != null) {
-            val getTaskOutput = GetTaskOutput(
+            val getTaskResponse = GetTaskResponse(
                 id = taskFound.id,
                 name = taskFound.name,
                 description = taskFound.description,
@@ -53,7 +53,7 @@ class TaskServiceImpl(private val repository: TaskRepository, private val userRe
                 appointedBy = taskFound.appointedBy,
                 tags = taskFound.tags
             )
-            return getTaskOutput
+            return getTaskResponse
         } else {
             return null
         }
@@ -72,7 +72,7 @@ class TaskServiceImpl(private val repository: TaskRepository, private val userRe
     }
 
     // Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content-Type 'text/plain;charset=UTF-8' is not supported]
-    override fun addTagToTaskById(request: AddTagToTask, id: Long): Boolean {
+    override fun addTagToTaskById(request: AddTagToTaskRequest, id: Long): Boolean {
 
         val taskToPatch = repository.getById(id) ?: return false // Достали задачу через сервис из репозитория по id в ссылке
         val taskToPatchUser = repository.getById(id)?.id ?: return false // Достали id пользователя из задачи
