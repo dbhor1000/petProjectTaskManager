@@ -37,13 +37,13 @@ class TaskController(private val taskService: TaskService) {
 
     @GetMapping("/{id}")
     fun getTaskById(@PathVariable id: Long): ResponseEntity<TaskDto> {
-        val taskFound = taskService.getTaskById(id).toDto()
+        val taskFound = taskService.getTaskById(id)?.toDto()
         return ResponseEntity(taskFound, HttpStatus.OK)
     }
 
     @PatchMapping("/{id}")
     fun patchTaskById(@RequestBody request: PatchTaskRequest, @PathVariable id: Long): ResponseEntity<*> {
-        val patchedTask = taskService.patchTaskById(request, id).toDto()
+        val patchedTask = taskService.patchTaskById(request, id)?.toDto()
         return ResponseEntity.status(HttpStatus.OK).body(patchedTask)
     }
 }

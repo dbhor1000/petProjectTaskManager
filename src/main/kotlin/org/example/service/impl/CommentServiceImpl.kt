@@ -47,14 +47,20 @@ class CommentServiceImpl(private val repository: CommentRepository, private val 
         val taskCommented = taskRepository.getById(correspondingTask) ?: error("user not found by id: '$correspondingTask'")
         val authorCommented = userRepository.getById(author) ?: error("user not found by id: '$author'")
 
-        val newComment = repository.save(
+        //val newComment = repository.save(
+        //    Comment(
+        //        commentText = commentText,
+        //        author = authorCommented,
+        //        correspondingTask = taskCommented,
+        //    ),
+        //)
+        return repository.save(
             Comment(
                 commentText = commentText,
                 author = authorCommented,
                 correspondingTask = taskCommented,
             ),
         )
-        return newComment
     }
 
     override fun patchCommentById(commentText: String, id: Long): Comment? {
