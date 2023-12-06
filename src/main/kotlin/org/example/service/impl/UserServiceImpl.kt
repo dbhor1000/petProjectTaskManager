@@ -10,7 +10,8 @@ class UserServiceImpl(private val userRepository: UserRepository) : UserService 
 
     override fun getUserById(userId: Long): User? = userRepository.getById(userId)
 
-    override fun addUser(user: User) {
+    override fun addUser(user: User): User {
         val newUser = userRepository.save(user)
+        return user
     }
 }

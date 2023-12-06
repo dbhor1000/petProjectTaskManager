@@ -40,7 +40,7 @@ class TaskServiceImpl(
 
     override fun getTaskById(id: Long) = repository.findByIdOrNull(id) ?: error("Could not find task by id: '$id'")
 
-    override fun patchTaskById(request: PatchTaskRequest, id: Long): Task {
+    override fun patchTaskById(request: PatchTaskRequest, id: Long): Task? {
         val taskToPatch = repository.getById(id) ?: error("Could not find task by id: '$id'")
 
         taskToPatch.name = request.name

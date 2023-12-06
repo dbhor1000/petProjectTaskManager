@@ -3,6 +3,9 @@ package org.example.controller
 import jakarta.transaction.Transactional
 import org.example.controller.dto.CreateCommentRequest
 import org.example.controller.dto.PatchCommentRequest
+import org.example.controller.dto.common.CommentDto
+import org.example.controller.dto.common.CommentDto.Companion.toDto
+import org.example.controller.dto.common.TaskDto.Companion.toDto
 import org.example.service.CommentService
 import org.example.service.TaskService
 import org.example.service.UserService
@@ -16,13 +19,19 @@ import org.springframework.web.bind.annotation.*
 class CommentController(@Autowired private val commentService: CommentService, private val taskService: TaskService, private val userService: UserService) {
 
     // 404 через postman, не устанавливается контакт с контроллером
+    // @PostMapping
+    // fun addComment(@RequestBody request: CreateCommentRequest): ResponseEntity<CommentDto> {
+    //    return if (commentService.addComment(request)) {
+    //        ResponseEntity.status(HttpStatus.CREATED).body(Unit)
+    //    } else {
+    //        ResponseEntity.status(HttpStatus.NOT_FOUND).body(Unit)
+    //    }
+    // }
+
     @PostMapping
-    fun addComment(@RequestBody request: CreateCommentRequest): ResponseEntity<*> {
-        return if (commentService.addComment(request)) {
-            ResponseEntity.status(HttpStatus.CREATED).body(Unit)
-        } else {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body(Unit)
-        }
+    fun addComment(@RequestBody request: CreateCommentRequest): ResponseEntity<CommentDto> {
+        val createdComment = commentService.addComment(request.commentText, request.author, request.correspondingTask).toDto()
+        return ResponseEntity.status(HttpStatus.OK).body(createdComment)
     }
 
     @Transactional

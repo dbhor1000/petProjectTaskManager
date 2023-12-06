@@ -1,8 +1,5 @@
 package org.example.service.impl
 
-import org.example.controller.dto.CreateCommentRequest
-import org.example.controller.dto.GetCommentResponse
-import org.example.controller.dto.PatchCommentRequest
 import org.example.model.Comment
 import org.example.repository.CommentRepository
 import org.example.repository.TaskRepository
@@ -24,44 +21,49 @@ class CommentServiceImpl(private val repository: CommentRepository, private val 
         return false
     }
 
-    override fun getCommentById(id: Long): GetCommentResponse? {
+    override fun getCommentById(id: Long): Comment? {
 
-        val commentFound = repository.findByIdOrNull(id)
-        if (commentFound != null) {
-            val getCommentResponse = GetCommentResponse(
-                commentText = commentFound.commentText,
-                author = commentFound.author,
-                correspondingTask = commentFound.correspondingTask
-
-            )
-            return getCommentResponse
-        } else {
-            return null
-        }
+        val commentFound = repository.findByIdOrNull(id) ?: error("user not found by id: '$id'")
+        return commentFound
     }
 
-    override fun addComment(request: CreateCommentRequest): Boolean {
+    // override fun addComment(request: CreateCommentRequest): Comment? {
+    //
+    //    val taskCommented = taskRepository.getById(request.correspondingTask) ?: error("user not found by id: '$userId'")
+    //    val authorCommented = userRepository.getById(request.author) ?: error("user not found by id: '$userId'")
+    //
+    //    val newComment = repository.save(
+    //        Comment(
+    //            commentText = request.commentText,
+    //            author = authorCommented,
+    //            correspondingTask = taskCommented,
+    //        ),
+    //    )
+    //    return true
+    // }
 
-        val taskCommented = taskRepository.getById(request.correspondingTask) ?: return false
-        val authorCommented = userRepository.getById(request.author) ?: return false
+    override fun addComment(commentText: String, author: Long, correspondingTask: Long,): Comment {
+
+        val taskCommented = taskRepository.getById(correspondingTask) ?: error("user not found by id: '$correspondingTask'")
+        val authorCommented = userRepository.getById(author) ?: error("user not found by id: '$author'")
 
         val newComment = repository.save(
             Comment(
-                commentText = request.commentText,
+                commentText = commentText,
                 author = authorCommented,
                 correspondingTask = taskCommented,
             ),
         )
-        return true
+        return newComment
     }
 
-    override fun patchCommentById(request: PatchCommentRequest, id: Long): Boolean {
+    override fun patchCommentById(commentText: String, id: Long): Comment? {
 
-        val commentToPatch = repository.getById(id) ?: return false // Достали задачу через сервис из репозитория по id в ссылке
+        val commentToPatch = repository.getById(id) ?: error("user not found by id: '$id'")
 
-        commentToPatch.commentText = request.commentText
+        commentToPatch.commentText = commentText
         repository.save(commentToPatch)
 
-        return true
+        return commentToPatch
     }
 }

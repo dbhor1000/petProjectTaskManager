@@ -1,5 +1,7 @@
 package org.example.controller
 
+import org.example.controller.dto.common.UserDto
+import org.example.controller.dto.common.UserDto.Companion.toDto
 import org.example.model.User
 import org.example.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,8 +21,8 @@ class UserController(@Autowired private val userService: UserService) {
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE],
     )
-    fun addUser(@RequestBody user: User): ResponseEntity<*> {
+    fun addUser(@RequestBody user: User): ResponseEntity<UserDto> {
         userService.addUser(user)
-        return ResponseEntity.status(HttpStatus.CREATED).body(Unit)
+        return ResponseEntity.status(HttpStatus.CREATED).body(user.toDto())
     }
 }
