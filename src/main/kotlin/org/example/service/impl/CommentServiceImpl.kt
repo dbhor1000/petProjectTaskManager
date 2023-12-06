@@ -1,7 +1,7 @@
 package org.example.service.impl
 
 import org.example.controller.dto.CreateCommentRequest
-import org.example.controller.dto.GetCommentOutput
+import org.example.controller.dto.GetCommentResponse
 import org.example.controller.dto.PatchCommentRequest
 import org.example.model.Comment
 import org.example.repository.CommentRepository
@@ -24,17 +24,17 @@ class CommentServiceImpl(private val repository: CommentRepository, private val 
         return false
     }
 
-    override fun getCommentById(id: Long): GetCommentOutput? {
+    override fun getCommentById(id: Long): GetCommentResponse? {
 
         val commentFound = repository.findByIdOrNull(id)
         if (commentFound != null) {
-            val getCommentOutput = GetCommentOutput(
+            val getCommentResponse = GetCommentResponse(
                 commentText = commentFound.commentText,
                 author = commentFound.author,
                 correspondingTask = commentFound.correspondingTask
 
             )
-            return getCommentOutput
+            return getCommentResponse
         } else {
             return null
         }

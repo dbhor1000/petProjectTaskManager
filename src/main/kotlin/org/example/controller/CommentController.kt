@@ -15,14 +15,13 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/comments")
 class CommentController(@Autowired private val commentService: CommentService, private val taskService: TaskService, private val userService: UserService) {
 
-    //404 через postman, не устанавливается контакт с контроллером
+    // 404 через postman, не устанавливается контакт с контроллером
     @PostMapping
     fun addComment(@RequestBody request: CreateCommentRequest): ResponseEntity<*> {
-
-        if (commentService.addComment(request) == true) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(Unit)
+        return if (commentService.addComment(request)) {
+            ResponseEntity.status(HttpStatus.CREATED).body(Unit)
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Unit)
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body(Unit)
         }
     }
 
@@ -40,7 +39,6 @@ class CommentController(@Autowired private val commentService: CommentService, p
 
     @GetMapping("/{id}")
     fun getTaskById(@PathVariable id: Long): ResponseEntity<*> {
-
         val commentFound = commentService.getCommentById(id)
 
         return if (commentFound != null) {
@@ -52,11 +50,10 @@ class CommentController(@Autowired private val commentService: CommentService, p
 
     @PatchMapping("/{id}")
     fun patchCommentById(@RequestBody request: PatchCommentRequest, @PathVariable id: Long): ResponseEntity<*> {
-
-        if (commentService.patchCommentById(request, id) == true) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Unit)
+        return if (commentService.patchCommentById(request, id)) {
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body(Unit)
         } else {
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(Unit)
+            ResponseEntity.status(HttpStatus.ACCEPTED).body(Unit)
         }
     }
 }

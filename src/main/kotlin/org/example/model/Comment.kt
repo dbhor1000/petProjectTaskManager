@@ -16,5 +16,4 @@ data class Comment(
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "TASK_ID", nullable = false)
     val correspondingTask: Task
-
 )
