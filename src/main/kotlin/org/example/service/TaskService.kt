@@ -1,8 +1,6 @@
 package org.example.service
 
-import org.example.controller.task.dto.PatchTaskRequest
 import org.example.model.Task
-import org.example.model.TaskState
 import java.time.OffsetDateTime
 
 interface TaskService {

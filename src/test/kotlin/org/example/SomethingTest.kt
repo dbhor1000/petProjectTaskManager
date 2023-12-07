@@ -7,10 +7,9 @@ import kotlin.test.assertEquals
 
 class SomethingTest : AbstractIntegrationTest() {
 
-   @Autowired
-   lateinit var commentRepository: CommentRepository
+    @Autowired
+    lateinit var commentRepository: CommentRepository
 
-   
     @Test
     internal fun happyWay() {
         assertEquals(0, commentRepository.count())

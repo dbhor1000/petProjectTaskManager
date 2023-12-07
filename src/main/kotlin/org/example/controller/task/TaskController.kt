@@ -8,8 +8,6 @@ import org.example.controller.dto.common.TaskDto
 import org.example.controller.dto.common.TaskDto.Companion.toDto
 import org.example.controller.task.dto.CreateTaskRequest
 import org.example.controller.task.dto.PatchTaskRequest
-import org.example.model.Task
-import org.example.model.TaskState
 import org.example.service.TaskService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.time.OffsetDateTime
 
 @RestController
 @RequestMapping("/tasks")
@@ -76,7 +73,7 @@ class TaskController(private val taskService: TaskService) {
             ),
             ApiResponse(
                 responseCode = "500",
-                description = "Внутренняя ошибка сервера/запись не найдена в БД" //Код ошибки важен в данном случае?
+                description = "Внутренняя ошибка сервера/запись не найдена в БД" // Код ошибки важен в данном случае?
             )
         ]
     )
@@ -95,7 +92,7 @@ class TaskController(private val taskService: TaskService) {
             ),
             ApiResponse(
                 responseCode = "500",
-                description = "Внутренняя ошибка сервера/запись не найдена в БД" //Код ошибки важен в данном случае?
+                description = "Внутренняя ошибка сервера/запись не найдена в БД" // Код ошибки важен в данном случае?
             )
         ]
     )

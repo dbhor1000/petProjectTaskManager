@@ -29,7 +29,7 @@ class UserController(@Autowired private val userService: UserService) {
             ),
             ApiResponse(
                 responseCode = "400",
-                description = "Ошибочный запрос" //Код ошибки важен в данном случае?
+                description = "Ошибочный запрос" // Код ошибки важен в данном случае?
             )
         ]
     )

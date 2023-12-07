@@ -1,4 +1,3 @@
 package org.example.controller.task.dto
 
-class PatchTagRequest {
-}
+class PatchTagRequest

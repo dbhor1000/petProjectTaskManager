@@ -1,9 +1,6 @@
 package org.example.service.impl
 
-import org.example.controller.task.dto.PatchTaskRequest
-import org.example.model.Tag
 import org.example.model.Task
-import org.example.model.TaskState
 import org.example.repository.TaskRepository
 import org.example.repository.UserRepository
 import org.example.service.TaskService

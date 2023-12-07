@@ -31,7 +31,7 @@ class CommentController(@Autowired private val commentService: CommentService, p
     //    }
     // }
 
-    //---> Тестируем
+    // ---> Тестируем
     @Operation(summary = "Добавить комментарий")
     @ApiResponses(
         value = [
@@ -41,7 +41,7 @@ class CommentController(@Autowired private val commentService: CommentService, p
             ),
             ApiResponse(
                 responseCode = "400",
-                description = "Ошибочный запрос" //Код ошибки важен в данном случае?
+                description = "Ошибочный запрос" // Код ошибки важен в данном случае?
             )
         ]
     )
@@ -60,7 +60,7 @@ class CommentController(@Autowired private val commentService: CommentService, p
             ),
             ApiResponse(
                 responseCode = "404",
-                description = "Ошибочный запрос/отсутствует запись в БД" //Код ошибки важен в данном случае?
+                description = "Ошибочный запрос/отсутствует запись в БД" // Код ошибки важен в данном случае?
             )
         ]
     )
@@ -85,7 +85,7 @@ class CommentController(@Autowired private val commentService: CommentService, p
             ),
             ApiResponse(
                 responseCode = "500",
-                description = "Ошибочный запрос/внутренняя ошибка сервера" //Код ошибки важен в данном случае?
+                description = "Ошибочный запрос/внутренняя ошибка сервера" // Код ошибки важен в данном случае?
             )
         ]
     )
@@ -104,7 +104,7 @@ class CommentController(@Autowired private val commentService: CommentService, p
             ),
             ApiResponse(
                 responseCode = "500",
-                description = "Ошибочный запрос/внутренняя ошибка сервера" //Код ошибки важен в данном случае?
+                description = "Ошибочный запрос/внутренняя ошибка сервера" // Код ошибки важен в данном случае?
             )
         ]
     )
