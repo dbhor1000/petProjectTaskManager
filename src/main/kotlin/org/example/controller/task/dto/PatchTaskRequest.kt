@@ -8,6 +8,6 @@ data class PatchTaskRequest(
     val name: String,
     val description: String,
     val executeAt: OffsetDateTime,
-    val taskState: TaskState,
-    val tagsToAdd: List<Tag>,
+    //val taskState: TaskState,
+    //val tagsToAdd: List<Tag>,
 )

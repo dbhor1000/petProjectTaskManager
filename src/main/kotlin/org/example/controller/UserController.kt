@@ -1,5 +1,8 @@
 package org.example.controller
 
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.responses.ApiResponse
+import io.swagger.v3.oas.annotations.responses.ApiResponses
 import org.example.controller.dto.common.UserDto
 import org.example.controller.dto.common.UserDto.Companion.toDto
 import org.example.model.User
@@ -17,6 +20,19 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/users")
 class UserController(@Autowired private val userService: UserService) {
 
+    @Operation(summary = "Вывод задачи")
+    @ApiResponses(
+        value = [
+            ApiResponse(
+                responseCode = "201",
+                description = "Успешное добавление пользователя"
+            ),
+            ApiResponse(
+                responseCode = "400",
+                description = "Ошибочный запрос" //Код ошибки важен в данном случае?
+            )
+        ]
+    )
     @PostMapping(
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE],

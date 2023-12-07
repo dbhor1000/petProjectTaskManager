@@ -1,6 +1,7 @@
 package org.example.service.impl
 
 import org.example.controller.task.dto.PatchTaskRequest
+import org.example.model.Tag
 import org.example.model.Task
 import org.example.model.TaskState
 import org.example.repository.TaskRepository
@@ -40,17 +41,12 @@ class TaskServiceImpl(
 
     override fun getTaskById(id: Long) = repository.findByIdOrNull(id) ?: error("Could not find task by id: '$id'")
 
-    override fun patchTaskById(request: PatchTaskRequest, id: Long): Task? {
+    override fun patchTaskById(name: String, description: String, executeAt: OffsetDateTime, id: Long): Task? {
         val taskToPatch = repository.getById(id) ?: error("Could not find task by id: '$id'")
 
-        taskToPatch.name = request.name
-        taskToPatch.description = request.description
-        taskToPatch.taskState = request.taskState
-        taskToPatch.executeAt = request.executeAt
-
-        if (request.taskState == TaskState.COMPLETED) {
-            taskToPatch.completedAt = OffsetDateTime.now()
-        }
+        taskToPatch.name = name
+        taskToPatch.description = description
+        taskToPatch.executeAt = executeAt
 
         return repository.save(taskToPatch)
     }

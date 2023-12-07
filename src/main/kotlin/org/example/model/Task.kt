@@ -38,10 +38,3 @@ data class Task(
     var executeAt: OffsetDateTime? = null,
     var completedAt: OffsetDateTime? = null,
 )
-
-enum class TaskState { CREATED, IN_DEVELOPMENT, COMPLETED }
-
-// enum class Tags {
-//
-//    COLLECTIVE, INDIVIDUAL, COMPULSORY, DELAYED, GUEST
-// }
