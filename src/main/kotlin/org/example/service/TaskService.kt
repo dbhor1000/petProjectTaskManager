@@ -9,4 +9,5 @@ interface TaskService {
     fun getTaskById(id: Long): Task?
     fun addTask(name: String, description: String, userId: Long, executeAt: OffsetDateTime): Task
     fun patchTaskById(name: String, description: String, executeAt: OffsetDateTime, id: Long): Task?
+    fun findAll(): List<Task>
 }

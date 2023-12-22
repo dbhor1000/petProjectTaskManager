@@ -29,17 +29,18 @@ class TaskController(private val taskService: TaskService) {
         value = [
             ApiResponse(
                 responseCode = "200",
-                description = "Успешное добавление задачи"
+                description = "Успешное добавление задачи",
             ),
             ApiResponse(
                 responseCode = "400",
-                description = "Ошибочный запрос/формат"
-            )
-        ]
+                description = "Ошибочный запрос/формат",
+            ),
+        ],
     )
     @PostMapping
     fun addTask(@RequestBody request: CreateTaskRequest): ResponseEntity<TaskDto> {
-        val createdTask = taskService.addTask(request.name, request.description, request.userId, request.executeAt).toDto()
+        val createdTask =
+            taskService.addTask(request.name, request.description, request.userId, request.executeAt).toDto()
         return ResponseEntity.status(HttpStatus.OK).body(createdTask)
     }
 
@@ -48,13 +49,13 @@ class TaskController(private val taskService: TaskService) {
         value = [
             ApiResponse(
                 responseCode = "200",
-                description = "Успешное добавление задачи"
+                description = "Успешное добавление задачи",
             ),
             ApiResponse(
                 responseCode = "404",
-                description = "Ошибочный запрос/запись отсутствует в базе"
-            )
-        ]
+                description = "Ошибочный запрос/запись отсутствует в базе",
+            ),
+        ],
     )
     @Transactional
     @DeleteMapping("/{id}")
@@ -69,13 +70,13 @@ class TaskController(private val taskService: TaskService) {
         value = [
             ApiResponse(
                 responseCode = "200",
-                description = "Успешное добавление задачи"
+                description = "Успешное добавление задачи",
             ),
             ApiResponse(
                 responseCode = "500",
-                description = "Внутренняя ошибка сервера/запись не найдена в БД" // Код ошибки важен в данном случае?
-            )
-        ]
+                description = "Внутренняя ошибка сервера/запись не найдена в БД", // Код ошибки важен в данном случае?
+            ),
+        ],
     )
     @GetMapping("/{id}")
     fun getTaskById(@PathVariable id: Long): ResponseEntity<TaskDto> {
@@ -88,17 +89,22 @@ class TaskController(private val taskService: TaskService) {
         value = [
             ApiResponse(
                 responseCode = "200",
-                description = "Успешное добавление задачи"
+                description = "Успешное добавление задачи",
             ),
             ApiResponse(
                 responseCode = "500",
-                description = "Внутренняя ошибка сервера/запись не найдена в БД" // Код ошибки важен в данном случае?
-            )
-        ]
+                description = "Внутренняя ошибка сервера/запись не найдена в БД", // Код ошибки важен в данном случае?
+            ),
+        ],
     )
     @PatchMapping("/{id}")
     fun patchTaskById(@RequestBody request: PatchTaskRequest, @PathVariable id: Long): ResponseEntity<TaskDto> {
         val patchedTask = taskService.patchTaskById(request.name, request.description, request.executeAt, id)?.toDto()
         return ResponseEntity.status(HttpStatus.OK).body(patchedTask)
+    }
+
+    @GetMapping
+    fun getTasks(): ResponseEntity<List<TaskDto>> {
+        return ResponseEntity(taskService.findAll().map { it.toDto() }, HttpStatus.OK)
     }
 }

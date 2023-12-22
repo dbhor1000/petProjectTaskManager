@@ -47,4 +47,6 @@ class TaskServiceImpl(
 
         return repository.save(taskToPatch)
     }
+
+    override fun findAll(): List<Task> = repository.findAll().toList()
 }
