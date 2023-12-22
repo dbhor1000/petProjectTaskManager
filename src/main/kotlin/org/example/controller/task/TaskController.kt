@@ -10,6 +10,7 @@ import org.example.controller.task.dto.CreateTaskRequest
 import org.example.controller.task.dto.PatchTaskRequest
 import org.example.service.TaskService
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -37,7 +38,10 @@ class TaskController(private val taskService: TaskService) {
             ),
         ],
     )
-    @PostMapping
+    @PostMapping(
+        consumes = [MediaType.APPLICATION_JSON_VALUE],
+        produces = [MediaType.APPLICATION_JSON_VALUE],
+    )
     fun addTask(@RequestBody request: CreateTaskRequest): ResponseEntity<TaskDto> {
         val createdTask =
             taskService.addTask(request.name, request.description, request.userId, request.executeAt).toDto()
@@ -78,7 +82,10 @@ class TaskController(private val taskService: TaskService) {
             ),
         ],
     )
-    @GetMapping("/{id}")
+    @GetMapping(
+        "/{id}",
+        produces = [MediaType.APPLICATION_JSON_VALUE],
+    )
     fun getTaskById(@PathVariable id: Long): ResponseEntity<TaskDto> {
         val taskFound = taskService.getTaskById(id)?.toDto()
         return ResponseEntity(taskFound, HttpStatus.OK)
@@ -97,13 +104,20 @@ class TaskController(private val taskService: TaskService) {
             ),
         ],
     )
-    @PatchMapping("/{id}")
+    @PatchMapping(
+        "/{id}",
+        consumes = [MediaType.APPLICATION_JSON_VALUE],
+        produces = [MediaType.APPLICATION_JSON_VALUE],
+    )
     fun patchTaskById(@RequestBody request: PatchTaskRequest, @PathVariable id: Long): ResponseEntity<TaskDto> {
         val patchedTask = taskService.patchTaskById(request.name, request.description, request.executeAt, id)?.toDto()
         return ResponseEntity.status(HttpStatus.OK).body(patchedTask)
     }
 
-    @GetMapping
+    @GetMapping(
+        consumes = [MediaType.APPLICATION_JSON_VALUE],
+        produces = [MediaType.APPLICATION_JSON_VALUE],
+    )
     fun getTasks(): ResponseEntity<List<TaskDto>> {
         return ResponseEntity(taskService.findAll().map { it.toDto() }, HttpStatus.OK)
     }
