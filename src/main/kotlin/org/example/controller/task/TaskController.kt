@@ -115,7 +115,6 @@ class TaskController(private val taskService: TaskService) {
     }
 
     @GetMapping(
-        consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE],
     )
     fun getTasks(): ResponseEntity<List<TaskDto>> {
