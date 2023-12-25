@@ -1,12 +1,25 @@
 package org.example.configuration
 
-import org.springframework.context.annotation.Configuration
-import org.springframework.web.servlet.config.annotation.CorsRegistry
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
+import jakarta.servlet.Filter
+import jakarta.servlet.FilterChain
+import jakarta.servlet.FilterConfig
+import jakarta.servlet.ServletRequest
+import jakarta.servlet.ServletResponse
+import jakarta.servlet.http.HttpServletResponse
+import org.springframework.stereotype.Component
 
-@Configuration
-class WebConfiguration : WebMvcConfigurer {
-    override fun addCorsMappings(registry: CorsRegistry) {
-        registry.addMapping("/**").allowedMethods("*")
+@Component
+class SimpleCORSFilter : Filter {
+
+    override fun doFilter(req: ServletRequest?, res: ServletResponse, chain: FilterChain) {
+        val response = res as HttpServletResponse
+        response.setHeader("Access-Control-Allow-Origin", "*")
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE")
+        response.setHeader("Access-Control-Max-Age", "3600")
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with")
+        chain.doFilter(req, res)
     }
+
+    override fun init(filterConfig: FilterConfig?) {}
+    override fun destroy() {}
 }
